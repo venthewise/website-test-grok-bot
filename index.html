@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery of Ten — Distinct Worlds</title>
+<meta name="description" content="Ten mutually distinct single-page experiences — from neon cyberpunk to bioluminescent depths.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0b;
+  --surface: #141416;
+  --border: #2a2a2e;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --accent: #e8e4d9;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.noise {
+  position: fixed; inset: 0; pointer-events: none; z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+header {
+  padding: 4rem 1.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+h1 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--accent);
+}
+h1 em { font-style: italic; color: #c4bfb0; }
+.lede {
+  max-width: 32rem;
+  margin: 1.5rem auto 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 300;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
+.card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.3s, box-shadow 0.4s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #3f3f46;
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.55);
+}
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.preview {
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+.preview::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--surface) 0%, transparent 55%);
+}
+.meta { padding: 0 1.35rem 1.5rem; }
+.num {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.card h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+}
+.card p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+.arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.35rem;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+  color: var(--accent);
+}
+.card:hover .arrow { opacity: 1; transform: translateX(0); }
+
+/* Preview art directions */
+.p01 { background: linear-gradient(135deg, #0d0221 0%, #1a0533 40%, #ff006e 100%); }
+.p01::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 80%, #00f5d4 0%, transparent 35%),
+    radial-gradient(circle at 80% 20%, #7b2cbf 0%, transparent 40%);
+  animation: pulse 4s ease-in-out infinite alternate;
+}
+.p02 { background: linear-gradient(160deg, #faf8f5 0%, #f0ebe3 50%, #d4af37 120%); }
+.p02::before {
+  content: ''; position: absolute; width: 80px; height: 80px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.35), transparent);
+  top: 20%; left: 30%;
+}
+.p03 { background: #e8e4de; }
+.p03::before {
+  content: 'AA'; position: absolute; font-family: monospace; font-size: 5rem; font-weight: 900;
+  color: #1a1a1a; top: 50%; left: 50%; transform: translate(-50%,-55%); letter-spacing: -0.08em;
+}
+.p04 { background: linear-gradient(180deg, #e8f0e4 0%, #a8c5a0 60%, #5a7d52 100%); }
+.p04::before {
+  content: ''; position: absolute; bottom: 0; left: 10%; right: 10%; height: 60%;
+  background: radial-gradient(ellipse at bottom, #3d5a3a 0%, transparent 70%);
+  border-radius: 50% 50% 0 0;
+}
+.p05 { background: #0c0a00; }
+.p05::before {
+  content: '> _'; position: absolute; font-family: monospace; font-size: 2rem;
+  color: #ffb000; top: 40%; left: 20%; text-shadow: 0 0 12px #ffb000;
+  animation: blink 1.2s step-end infinite;
+}
+.p06 { background: radial-gradient(ellipse at 50% 60%, #1a1040 0%, #050510 70%); }
+.p06::before {
+  content: ''; position: absolute; width: 60px; height: 60px; border-radius: 50%;
+  background: radial-gradient(circle, #c4b5fd, #6366f1 40%, transparent 70%);
+  top: 30%; left: 45%; box-shadow: 0 0 40px #818cf8;
+}
+.p07 { background: #ffeb3b; }
+.p07::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(45deg, transparent 40%, #ff1744 40%, #ff1744 55%, transparent 55%),
+    radial-gradient(circle at 80% 30%, #00bcd4 0%, #00bcd4 18%, transparent 18%),
+    linear-gradient(-30deg, transparent 60%, #212121 60%, #212121 70%, transparent 70%);
+}
+.p08 { background: linear-gradient(180deg, #2c2416 0%, #5c4a32 40%, #8b6914 100%); }
+.p08::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.08) 8px, rgba(0,0,0,0.08) 9px);
+}
+.p09 { background: #111; }
+.p09::before {
+  content: 'Aa'; position: absolute; font-family: Impact, sans-serif; font-size: 6rem;
+  color: #fff; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: linear-gradient(90deg, #ff0080, #7928ca, #00d4ff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: slide 3s ease-in-out infinite alternate;
+}
+.p10 { background: radial-gradient(ellipse at 50% 80%, #0a3d3d 0%, #021818 60%, #010a0a 100%); }
+.p10::before {
+  content: ''; position: absolute; width: 40px; height: 40px; border-radius: 50%;
+  background: #00ffcc; opacity: 0.6; top: 35%; left: 40%;
+  box-shadow: 0 0 30px #00ffcc, 80px 20px 25px #00aaff, -30px 40px 20px #44ff88;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes slide { from { letter-spacing: -0.05em; } to { letter-spacing: 0.15em; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+footer {
+  text-align: center;
+  padding: 2rem 1.5rem 3rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+</style>
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<header>
+  <p class="eyebrow">Ten Worlds · One Gallery</p>
+  <h1>A collection of<br><em>distinct</em> experiences</h1>
+  <p class="lede">Each page is a self-contained art direction — palette, type, layout, and motion — with nothing repeated.</p>
+</header>
+<main class="grid">
+  <a class="card" href="sites/01-neon-tokyo/">
+    <div class="preview p01"></div>
+    <div class="meta">
+      <p class="num">01</p>
+      <h2>Neon Tokyo</h2>
+      <p>Cyberpunk nightclub poster energy</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/02-soft-luxury-spa/">
+    <div class="preview p02"></div>
+    <div class="meta">
+      <p class="num">02</p>
+      <h2>Soft Luxury</h2>
+      <p>Editorial white-gold spa serene</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/03-brutalist-portfolio/">
+    <div class="preview p03"></div>
+    <div class="meta">
+      <p class="num">03</p>
+      <h2>Brutalist</h2>
+      <p>Raw concrete · monospace portfolio</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/04-botanical-greenhouse/">
+    <div class="preview p04"></div>
+    <div class="meta">
+      <p class="num">04</p>
+      <h2>Botanical</h2>
+      <p>Organic greenhouse watercolor</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/05-retro-terminal/">
+    <div class="preview p05"></div>
+    <div class="meta">
+      <p class="num">05</p>
+      <h2>Retro Terminal</h2>
+      <p>Amber CRT hacker mythos</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/06-cosmic-observatory/">
+    <div class="preview p06"></div>
+    <div class="meta">
+      <p class="num">06</p>
+      <h2>Cosmic Observatory</h2>
+      <p>Deep space glassmorphism</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/07-memphis-geometry/">
+    <div class="preview p07"></div>
+    <div class="meta">
+      <p class="num">07</p>
+      <h2>Memphis</h2>
+      <p>80s playful geometry riot</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/08-nordic-cabin/">
+    <div class="preview p08"></div>
+    <div class="meta">
+      <p class="num">08</p>
+      <h2>Nordic Cabin</h2>
+      <p>Woodgrain calm · serif warmth</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/09-kinetic-type/">
+    <div class="preview p09"></div>
+    <div class="meta">
+      <p class="num">09</p>
+      <h2>Kinetic Type</h2>
+      <p>Oversized animated letterforms</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="card" href="sites/10-underwater-museum/">
+    <div class="preview p10"></div>
+    <div class="meta">
+      <p class="num">10</p>
+      <h2>Underwater Museum</h2>
+      <p>Deep teal bioluminescence</p>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+</main>
+<footer>
+  <p>Ten art directions · Self-contained HTML · GitHub Pages</p>
+</footer>
+</body>
+</html>

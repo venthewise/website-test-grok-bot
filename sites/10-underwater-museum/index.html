@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abyss Gallery — Underwater Museum</title>
+<meta name="description" content="Deep teal bioluminescence. An underwater museum of light and silence.">
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --abyss: #010a0a;
+  --deep: #021818;
+  --teal: #0a3d3d;
+  --bio: #00ffcc;
+  --bio-blue: #00aaff;
+  --bio-green: #44ff88;
+  --foam: #a8e6e0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--abyss);
+  color: var(--foam);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.ocean {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, var(--teal) 0%, var(--deep) 40%, var(--abyss) 70%);
+}
+.particles {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+}
+
+.caustic {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(0,255,204,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 60%, rgba(0,170,255,0.05) 0%, transparent 35%),
+    radial-gradient(ellipse at 40% 80%, rgba(68,255,136,0.03) 0%, transparent 30%);
+  animation: causticShift 10s ease-in-out infinite alternate;
+}
+@keyframes causticShift {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+nav {
+  position: relative; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 2.5rem;
+}
+.logo {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700; font-size: 0.75rem; letter-spacing: 0.3em;
+  color: var(--bio);
+  text-shadow: 0 0 20px rgba(0,255,204,0.5);
+}
+nav a {
+  color: rgba(168,230,224,0.5); text-decoration: none; font-size: 0.85rem;
+  transition: color 0.3s;
+}
+nav a:hover { color: var(--bio); }
+
+.hero {
+  position: relative; z-index: 5;
+  min-height: 90vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+.biolight {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--bio) 0%, transparent 70%);
+  opacity: 0.3;
+  margin-bottom: 2rem;
+  box-shadow:
+    0 0 60px var(--bio),
+    0 0 120px rgba(0,255,204,0.3),
+    40px -30px 50px rgba(0,170,255,0.25),
+    -50px 20px 40px rgba(68,255,136,0.2);
+  animation: pulseBio 4s ease-in-out infinite;
+}
+@keyframes pulseBio {
+  0%,100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.15); opacity: 0.5; }
+}
+.hero .depth {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.4em;
+  color: var(--bio-blue); margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(0,170,255,0.5);
+}
+.hero h1 {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.hero h1 .glow {
+  color: var(--bio);
+  text-shadow: 0 0 30px rgba(0,255,204,0.6), 0 0 60px rgba(0,255,204,0.3);
+}
+.hero p {
+  margin-top: 1.5rem;
+  max-width: 28rem;
+  font-size: 1.05rem;
+  color: rgba(168,230,224,0.6);
+  font-weight: 200;
+}
+
+.section {
+  position: relative; z-index: 5;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+.section h2 {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  letter-spacing: 0.2em;
+  color: var(--bio);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 15px rgba(0,255,204,0.4);
+}
+
+.exhibits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.exhibit {
+  background: rgba(10,61,61,0.3);
+  border: 1px solid rgba(0,255,204,0.15);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.exhibit::before {
+  content: '';
+  position: absolute;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  top: -20px; right: -10px;
+  opacity: 0.15;
+  transition: opacity 0.4s;
+}
+.exhibit:nth-child(1)::before { background: var(--bio); }
+.exhibit:nth-child(2)::before { background: var(--bio-blue); }
+.exhibit:nth-child(3)::before { background: var(--bio-green); }
+.exhibit:hover {
+  border-color: rgba(0,255,204,0.4);
+  box-shadow: 0 0 40px rgba(0,255,204,0.1);
+  transform: translateY(-4px);
+}
+.exhibit:hover::before { opacity: 0.3; }
+.exhibit .tag {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.55rem; letter-spacing: 0.25em;
+  color: var(--bio-blue); margin-bottom: 0.75rem;
+}
+.exhibit h3 {
+  font-size: 1.25rem; font-weight: 400;
+  margin-bottom: 0.75rem; color: var(--foam);
+}
+.exhibit p {
+  font-size: 0.9rem; color: rgba(168,230,224,0.5); font-weight: 200;
+}
+
+.depth-gauge {
+  position: relative; z-index: 5;
+  max-width: 1000px;
+  margin: 2rem auto 4rem;
+  padding: 0 2rem;
+}
+.gauge-track {
+  height: 4px;
+  background: rgba(0,255,204,0.1);
+  border-radius: 2px;
+  position: relative;
+  margin: 2rem 0 1rem;
+}
+.gauge-fill {
+  height: 100%;
+  width: 72%;
+  background: linear-gradient(90deg, var(--bio-blue), var(--bio));
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0,255,204,0.5);
+  animation: depthPulse 3s ease-in-out infinite;
+}
+@keyframes depthPulse {
+  0%,100% { width: 72%; }
+  50% { width: 78%; }
+}
+.gauge-labels {
+  display: flex; justify-content: space-between;
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.55rem; letter-spacing: 0.15em;
+  color: rgba(168,230,224,0.4);
+}
+.current-depth {
+  text-align: center;
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.5rem;
+  color: var(--bio);
+  text-shadow: 0 0 20px rgba(0,255,204,0.5);
+  margin-top: 1rem;
+}
+
+footer {
+  position: relative; z-index: 5;
+  text-align: center; padding: 2.5rem;
+  border-top: 1px solid rgba(0,255,204,0.1);
+  color: rgba(168,230,224,0.35); font-size: 0.8rem;
+}
+footer a { color: var(--bio); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="ocean" aria-hidden="true"></div>
+<div class="caustic" aria-hidden="true"></div>
+<div class="particles" id="particles" aria-hidden="true"></div>
+<nav>
+  <span class="logo">ABYSS GALLERY</span>
+  <a href="../../">← Gallery</a>
+</nav>
+<section class="hero">
+  <div class="biolight" aria-hidden="true"></div>
+  <p class="depth">−1,200m · SILENT ZONE</p>
+  <h1>Where light<br>is <span class="glow">alive</span></h1>
+  <p>An underwater museum of bioluminescent artifacts — sculptures that glow, histories that drift.</p>
+</section>
+<section class="section">
+  <h2>// CURRENT EXHIBITS</h2>
+  <div class="exhibits">
+    <article class="exhibit">
+      <p class="tag">HALL A</p>
+      <h3>Lantern Coral Choir</h3>
+      <p>Living polyps that pulse in unison — a soft green metronome of the deep reef.</p>
+    </article>
+    <article class="exhibit">
+      <p class="tag">HALL B</p>
+      <h3>Phantom Jelly Archive</h3>
+      <p>Transparent bells trailing neon filaments. Suspended in still water columns.</p>
+    </article>
+    <article class="exhibit">
+      <p class="tag">HALL C</p>
+      <h3>Abyssal Glyphs</h3>
+      <p>Stone tablets recovered from a trench — carved with symbols that faintly phosphoresce.</p>
+    </article>
+  </div>
+</section>
+<section class="depth-gauge">
+  <h2 style="font-family:'Syncopate',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:var(--bio);text-align:center;">CURRENT DEPTH</h2>
+  <div class="gauge-track"><div class="gauge-fill"></div></div>
+  <div class="gauge-labels"><span>0m</span><span>500m</span><span>1000m</span><span>2000m</span></div>
+  <p class="current-depth">−1,247 m</p>
+</section>
+<footer>
+  <p><a href="../../">← Back to Gallery</a> · Abyss Gallery Underwater Museum</p>
+</footer>
+<script>
+const container = document.getElementById('particles');
+const colors = ['#00ffcc', '#00aaff', '#44ff88'];
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = 2 + Math.random() * 5;
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.background = colors[i % 3];
+  p.style.boxShadow = `0 0 ${6 + size}px ${colors[i % 3]}`;
+  p.style.animationDuration = (8 + Math.random() * 16) + 's';
+  p.style.animationDelay = (Math.random() * 10) + 's';
+  container.appendChild(p);
+}
+</script>
+</body>
+</html>

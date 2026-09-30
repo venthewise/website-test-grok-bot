@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON TOKYO — Midnight Frequency Club</title>
+<meta name="description" content="Cyberpunk nightclub poster energy. Enter the frequency.">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --neon-pink: #ff006e;
+  --neon-cyan: #00f5d4;
+  --neon-purple: #7b2cbf;
+  --bg: #05010a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--bg);
+  color: #e0e0ff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.scanlines {
+  position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
+  opacity: 0.4;
+}
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    linear-gradient(rgba(123,44,191,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123,44,191,0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: center top;
+  height: 80vh; top: 40%;
+  animation: gridMove 8s linear infinite;
+}
+@keyframes gridMove { to { background-position: 0 40px; } }
+
+nav {
+  position: relative; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid rgba(255,0,110,0.3);
+}
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900; font-size: 0.85rem; letter-spacing: 0.3em;
+  color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan);
+}
+nav a { color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; }
+nav a:hover { color: var(--neon-pink); }
+
+.hero {
+  position: relative; z-index: 5;
+  min-height: 85vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 2rem;
+}
+.glitch-wrap { position: relative; }
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 12vw, 7rem);
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  background: linear-gradient(135deg, var(--neon-cyan), #fff, var(--neon-pink));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(255,0,110,0.5));
+  animation: flicker 4s infinite;
+}
+@keyframes flicker {
+  0%,100%,95%,97% { opacity: 1; }
+  96%,98% { opacity: 0.7; }
+}
+.tag {
+  margin-top: 1.5rem;
+  font-size: 1.1rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--neon-pink); text-shadow: 0 0 15px var(--neon-pink);
+}
+.cta {
+  margin-top: 2.5rem;
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.25em;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(0,245,212,0.3), inset 0 0 20px rgba(0,245,212,0.05);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.cta:hover {
+  background: var(--neon-cyan); color: var(--bg);
+  box-shadow: 0 0 40px rgba(0,245,212,0.6);
+}
+
+.section {
+  position: relative; z-index: 5;
+  max-width: 1100px; margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: var(--neon-cyan);
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 12px rgba(0,245,212,0.4);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: rgba(123,44,191,0.12);
+  border: 1px solid rgba(255,0,110,0.35);
+  padding: 1.75rem;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.card:hover { border-color: var(--neon-cyan); transform: translateY(-4px); }
+.card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem; letter-spacing: 0.1em;
+  color: var(--neon-pink); margin-bottom: 0.75rem;
+}
+.card p { font-size: 1rem; opacity: 0.85; line-height: 1.6; }
+
+.lineup {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.dj {
+  border-left: 3px solid var(--neon-pink);
+  padding: 1rem 1.25rem;
+  background: rgba(0,0,0,0.4);
+}
+.dj .time { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--neon-cyan); letter-spacing: 0.15em; }
+.dj .name { font-size: 1.3rem; font-weight: 600; margin: 0.25rem 0; }
+.dj .genre { font-size: 0.85rem; opacity: 0.6; }
+
+footer {
+  position: relative; z-index: 5;
+  text-align: center; padding: 2rem;
+  border-top: 1px solid rgba(255,0,110,0.25);
+  font-size: 0.8rem; letter-spacing: 0.2em; color: #666;
+}
+footer a { color: var(--neon-cyan); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+<nav>
+  <span class="logo">MFC // 2089</span>
+  <a href="../../">← Gallery</a>
+</nav>
+<section class="hero">
+  <div class="glitch-wrap">
+    <h1>NEON<br>TOKYO</h1>
+  </div>
+  <p class="tag">Midnight Frequency Club</p>
+  <a class="cta" href="#lineup">Enter the Signal</a>
+</section>
+<section class="section">
+  <h2>// THE VIBE</h2>
+  <div class="cards">
+    <article class="card">
+      <h3>01 · SYNTHWAVE</h3>
+      <p>Analog warmth meets digital neon. Floor-shaking basslines under a canopy of LED rain.</p>
+    </article>
+    <article class="card">
+      <h3>02 · NEON RAVE</h3>
+      <p>Strobe-lit corridors. Glow-stick constellations. Zero daylight until dawn protocol.</p>
+    </article>
+    <article class="card">
+      <h3>03 · AFTERDARK</h3>
+      <p>VIP skyboxes overlooking Shibuya residual. Champagne and circuit boards.</p>
+    </article>
+  </div>
+</section>
+<section class="section" id="lineup">
+  <h2>// TONIGHT'S LINEUP</h2>
+  <div class="lineup">
+    <div class="dj"><div class="time">22:00</div><div class="name">KIRA VOID</div><div class="genre">Dark Synth</div></div>
+    <div class="dj"><div class="time">00:00</div><div class="name">PIXEL SAMURAI</div><div class="genre">Cyberpunk Techno</div></div>
+    <div class="dj"><div class="time">02:00</div><div class="name">YUKI GLITCH</div><div class="genre">Ambient Breaks</div></div>
+    <div class="dj"><div class="time">04:00</div><div class="name">NEON GHOST</div><div class="genre">Closing Set</div></div>
+  </div>
+</section>
+<footer>
+  <p><a href="../../">← Back to Gallery</a> · MIDNIGHT FREQUENCY CLUB · SHIBUYA</p>
+</footer>
+</body>
+</html>

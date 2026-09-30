@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEMPHIS! — 80s Playful Geometry</title>
+<meta name="description" content="Memphis Group energy. Squiggles, triangles, confetti chaos.">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #ffeb3b;
+  --red: #ff1744;
+  --cyan: #00bcd4;
+  --black: #212121;
+  --pink: #ff4081;
+  --blue: #3d5afe;
+  --white: #fffef7;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Rubik', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* Confetti / pattern background */
+.pattern {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-color: var(--white);
+  background-image:
+    radial-gradient(circle at 15% 25%, var(--red) 0%, var(--red) 8px, transparent 8px),
+    radial-gradient(circle at 85% 15%, var(--cyan) 0%, var(--cyan) 6px, transparent 6px),
+    radial-gradient(circle at 70% 70%, var(--pink) 0%, var(--pink) 10px, transparent 10px),
+    radial-gradient(circle at 25% 80%, var(--blue) 0%, var(--blue) 5px, transparent 5px),
+    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(33,33,33,0.03) 20px, rgba(33,33,33,0.03) 21px);
+}
+
+nav {
+  position: relative; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.25rem 2rem;
+  background: var(--black);
+  color: var(--yellow);
+}
+.logo {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600; font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+nav a {
+  color: var(--yellow); text-decoration: none; font-weight: 700; font-size: 0.85rem;
+}
+nav a:hover { color: var(--cyan); }
+
+.hero {
+  position: relative; z-index: 5;
+  min-height: 75vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.hero h1 {
+  font-weight: 900;
+  font-size: clamp(3.5rem, 14vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  position: relative;
+}
+.hero h1 .y { color: var(--yellow); background: var(--black); padding: 0 0.15em; display: inline-block; transform: rotate(-2deg); }
+.hero h1 .r { color: var(--red); display: inline-block; transform: rotate(1.5deg); }
+.hero h1 .c { color: var(--cyan); background: var(--black); padding: 0 0.1em; display: inline-block; transform: rotate(-1deg); margin-top: 0.1em; }
+
+.squiggle {
+  width: 120px; height: 20px; margin: 1.5rem auto;
+  background: repeating-linear-gradient(90deg, var(--red) 0, var(--red) 10px, transparent 10px, transparent 16px, var(--cyan) 16px, var(--cyan) 26px, transparent 26px, transparent 32px);
+  animation: wiggle 1.5s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%,100% { transform: scaleX(1) translateY(0); }
+  50% { transform: scaleX(1.1) translateY(-4px); }
+}
+.hero p {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.3rem; max-width: 28rem;
+  margin-top: 0.5rem;
+}
+
+.shapes {
+  position: relative; z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+.card {
+  padding: 2rem;
+  border: 4px solid var(--black);
+  position: relative;
+  transition: transform 0.25s;
+}
+.card:nth-child(1) { background: var(--yellow); }
+.card:nth-child(2) { background: var(--cyan); }
+.card:nth-child(3) { background: var(--pink); color: #fff; }
+.card:nth-child(4) { background: var(--blue); color: #fff; }
+.card:hover { transform: rotate(-2deg) scale(1.03); }
+.card::before {
+  content: '';
+  position: absolute;
+  width: 24px; height: 24px;
+  top: -12px; right: 16px;
+  border: 3px solid var(--black);
+}
+.card:nth-child(1)::before { background: var(--red); border-radius: 50%; }
+.card:nth-child(2)::before { background: var(--yellow); transform: rotate(45deg); }
+.card:nth-child(3)::before { background: var(--cyan); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border: none; width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 22px solid var(--black); top: -18px; }
+.card:nth-child(4)::before { background: var(--pink); border-radius: 0; }
+.card h3 {
+  font-weight: 900; font-size: 1.4rem; text-transform: uppercase;
+  margin-bottom: 0.75rem; letter-spacing: -0.02em;
+}
+.card p { font-size: 0.95rem; font-weight: 400; }
+
+.banner {
+  position: relative; z-index: 5;
+  background: var(--red);
+  color: #fff;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-top: 6px solid var(--black);
+  border-bottom: 6px solid var(--black);
+  overflow: hidden;
+}
+.banner h2 {
+  font-weight: 900;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.banner p {
+  font-family: 'Fredoka', sans-serif;
+  margin-top: 0.75rem; font-size: 1.1rem;
+}
+
+.dots-row {
+  position: relative; z-index: 5;
+  display: flex; justify-content: center; gap: 12px;
+  padding: 2rem; flex-wrap: wrap;
+}
+.dot {
+  width: 28px; height: 28px; border: 3px solid var(--black);
+  animation: pop 2s ease-in-out infinite;
+}
+.dot:nth-child(1) { background: var(--yellow); border-radius: 50%; animation-delay: 0s; }
+.dot:nth-child(2) { background: var(--red); animation-delay: 0.2s; }
+.dot:nth-child(3) { background: var(--cyan); border-radius: 50%; animation-delay: 0.4s; }
+.dot:nth-child(4) { background: var(--pink); transform: rotate(45deg); animation-delay: 0.6s; }
+.dot:nth-child(5) { background: var(--blue); border-radius: 50%; animation-delay: 0.8s; }
+@keyframes pop {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+.dot:nth-child(4) {
+  animation-name: popDiamond;
+}
+@keyframes popDiamond {
+  0%,100% { transform: rotate(45deg) scale(1); }
+  50% { transform: rotate(45deg) scale(1.25); }
+}
+
+footer {
+  position: relative; z-index: 5;
+  text-align: center; padding: 2rem;
+  background: var(--black); color: var(--yellow);
+  font-weight: 700; font-size: 0.85rem;
+}
+footer a { color: var(--cyan); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="pattern" aria-hidden="true"></div>
+<nav>
+  <span class="logo">MEMPHIS!</span>
+  <a href="../../">← Gallery</a>
+</nav>
+<section class="hero">
+  <h1>
+    <span class="y">WILD</span>
+    <span class="r">SHAPE</span><br>
+    <span class="c">PARTY</span>
+  </h1>
+  <div class="squiggle" aria-hidden="true"></div>
+  <p>Triangles! Squiggles! Confetti! The 80s called and they want their geometry back — louder.</p>
+</section>
+<section class="shapes">
+  <article class="card">
+    <h3>Squiggle Mode</h3>
+    <p>Wavy lines that refuse to sit still. Function is overrated. Fun is mandatory.</p>
+  </article>
+  <article class="card">
+    <h3>Triangle Attack</h3>
+    <p>Pointy bits everywhere. Balance is for cowards. Asymmetry rules the dance floor.</p>
+  </article>
+  <article class="card">
+    <h3>Dot Matrix</h3>
+    <p>Polka dots the size of planets. Pattern clash is a feature, not a bug.</p>
+  </article>
+  <article class="card">
+    <h3>Color Riot</h3>
+    <p>Yellow + cyan + hot pink. If it doesn't vibrate, turn it up.</p>
+  </article>
+</section>
+<section class="banner">
+  <h2>No beige allowed!</h2>
+  <p>Est. whenever · Open forever · Bring your loudest shirt</p>
+</section>
+<div class="dots-row" aria-hidden="true">
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+<footer>
+  <p><a href="../../">← Back to Gallery</a> · MEMPHIS DESIGN ENERGY · 1981–∞</p>
+</footer>
+</body>
+</html>

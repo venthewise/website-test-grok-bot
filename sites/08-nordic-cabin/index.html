@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fjällhem — Nordic Cabin Retreat</title>
+<meta name="description" content="Woodgrain calm. Serif warmth. A cabin among the pines.">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --wood-dark: #2c2416;
+  --wood: #5c4a32;
+  --wood-mid: #8b6914;
+  --wood-light: #c4a574;
+  --cream: #f2ebe0;
+  --snow: #faf7f2;
+  --pine: #3d4a3a;
+  --ember: #b85c38;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--snow);
+  color: var(--wood-dark);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* Woodgrain texture via CSS */
+.wood-header {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--wood-dark) 0px,
+      #3d3220 2px,
+      var(--wood-dark) 4px,
+      #352a1a 7px,
+      #2c2416 10px
+    );
+  color: var(--cream);
+  padding: 1.25rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.wood-header .logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.25rem; letter-spacing: 0.08em;
+}
+.wood-header a {
+  color: var(--wood-light); text-decoration: none; font-size: 0.85rem;
+}
+.wood-header a:hover { color: var(--cream); }
+
+.hero {
+  min-height: 85vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--cream);
+}
+.hero-text {
+  padding: 4rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-text .eyebrow {
+  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--wood-mid); margin-bottom: 1.25rem; font-weight: 400;
+}
+.hero-text h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.25;
+  color: var(--wood-dark);
+  margin-bottom: 1.5rem;
+}
+.hero-text h1 em {
+  font-style: italic;
+  color: var(--ember);
+}
+.hero-text p {
+  font-size: 1.1rem; color: var(--wood);
+  max-width: 28rem; margin-bottom: 2rem;
+}
+.hero-visual {
+  background:
+    repeating-linear-gradient(
+      85deg,
+      #5c4a32 0px,
+      #6b5638 3px,
+      #5c4a32 6px,
+      #4a3c28 10px,
+      #5c4a32 14px
+    );
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(44,36,22,0.2), rgba(44,36,22,0.5));
+}
+.cabin-icon {
+  position: relative; z-index: 1;
+  text-align: center; color: var(--cream);
+}
+.cabin-icon .symbol {
+  font-size: 4rem; margin-bottom: 0.5rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  animation: ember 4s ease-in-out infinite;
+}
+@keyframes ember {
+  0%,100% { opacity: 0.85; }
+  50% { opacity: 1; filter: drop-shadow(0 0 12px rgba(184,92,56,0.5)); }
+}
+.cabin-icon p {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic; font-size: 1.1rem;
+}
+
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.section h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 1rem;
+  color: var(--wood-dark);
+}
+.section .lead {
+  color: var(--wood); margin-bottom: 2.5rem; max-width: 36rem;
+}
+
+.amenities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+.amenity {
+  border-top: 2px solid var(--wood-light);
+  padding-top: 1.25rem;
+}
+.amenity h3 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.15rem; font-weight: 700;
+  margin-bottom: 0.5rem; color: var(--pine);
+}
+.amenity p { color: var(--wood); font-size: 0.95rem; }
+
+.fire-block {
+  background: var(--wood-dark);
+  color: var(--cream);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+.fire-block blockquote {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+.fire-block cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wood-light);
+}
+
+.details {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem;
+  text-align: center; padding: 4rem 2rem;
+  background: var(--cream);
+}
+.details dt {
+  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--wood-mid); margin-bottom: 0.35rem; font-weight: 400;
+}
+.details dd {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.2rem;
+}
+
+footer {
+  text-align: center; padding: 2.5rem;
+  background: var(--wood-dark); color: var(--wood-light);
+  font-size: 0.85rem;
+}
+footer a { color: var(--cream); text-decoration: none; }
+
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { min-height: 200px; }
+  .hero-text { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+<header class="wood-header">
+  <span class="logo">Fjällhem</span>
+  <a href="../../">← Gallery</a>
+</header>
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Swedish Lapland · Est. 1923</p>
+    <h1>Come home<br>to the <em>quiet</em></h1>
+    <p>A timber cabin among the pines. Woodsmoke, wool blankets, and the long northern light.</p>
+  </div>
+  <div class="hero-visual">
+    <div class="cabin-icon">
+      <div class="symbol" aria-hidden="true">⌂</div>
+      <p>Where the forest keeps time</p>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <h2>The cabin</h2>
+  <p class="lead">Hand-hewn logs. A stone hearth. Windows that frame nothing but birch and sky.</p>
+  <div class="amenities">
+    <article class="amenity">
+      <h3>The Hearth</h3>
+      <p>Open fire of birch and pine. Cast-iron kettle always warm. Stories told in low voices.</p>
+    </article>
+    <article class="amenity">
+      <h3>The Loft</h3>
+      <p>Sheepskin and linen. A skylight for watching the aurora on clear winter nights.</p>
+    </article>
+    <article class="amenity">
+      <h3>The Sauna</h3>
+      <p>Wood-fired, lakeside. Plunge into cold water. Return to steam. Repeat until human again.</p>
+    </article>
+  </div>
+</section>
+<section class="fire-block">
+  <blockquote>"In the north, luxury is a roof that doesn't leak, a fire that doesn't die, and company that doesn't hurry."</blockquote>
+  <cite>— Fjällhem Guestbook, 1957</cite>
+</section>
+<section>
+  <dl class="details">
+    <div><dt>Sleeps</dt><dd>4 guests</dd></div>
+    <div><dt>Season</dt><dd>Year-round</dd></div>
+    <div><dt>Nearest Town</dt><dd>12 km</dd></div>
+    <div><dt>Wifi</dt><dd>None — by design</dd></div>
+  </dl>
+</section>
+<footer>
+  <p><a href="../../">← Back to Gallery</a> · Fjällhem Nordic Cabin</p>
+</footer>
+</body>
+</html>

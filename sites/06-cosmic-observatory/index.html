@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helioscope — Cosmic Observatory</title>
+<meta name="description" content="Deep space glassmorphism observatory. Watch the universe breathe.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #050510;
+  --nebula: #1a1040;
+  --star: #e8e4ff;
+  --violet: #8b5cf6;
+  --blue: #6366f1;
+  --glass: rgba(255,255,255,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--void);
+  color: var(--star);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+.stars {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 30% 60%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 50% 10%, #c4b5fd, transparent),
+    radial-gradient(1px 1px at 70% 40%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 80%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 15% 85%, #a5b4fc, transparent),
+    radial-gradient(1px 1px at 55% 55%, #fff, transparent),
+    radial-gradient(2px 2px at 80% 15%, #ddd6fe, transparent),
+    radial-gradient(ellipse at 50% 100%, var(--nebula) 0%, transparent 50%);
+  background-color: var(--void);
+  animation: twinkle 8s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: 0.85; }
+  to { opacity: 1; }
+}
+.planet {
+  position: fixed;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c4b5fd, var(--violet) 40%, #312e81 70%, transparent 75%);
+  top: 15%; right: -5%;
+  filter: blur(1px);
+  box-shadow: 0 0 80px rgba(139,92,246,0.4), 0 0 160px rgba(99,102,241,0.2);
+  animation: drift 20s ease-in-out infinite alternate;
+  z-index: 1;
+  opacity: 0.7;
+}
+@keyframes drift {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(-40px, 30px) rotate(15deg); }
+}
+
+nav {
+  position: relative; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 2.5rem;
+}
+.logo {
+  font-weight: 500; letter-spacing: 0.15em; font-size: 0.85rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #c4b5fd, #818cf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+nav a {
+  color: rgba(232,228,255,0.6); text-decoration: none; font-size: 0.85rem;
+  transition: color 0.3s;
+}
+nav a:hover { color: #c4b5fd; }
+
+.hero {
+  position: relative; z-index: 5;
+  min-height: 80vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 3rem 2.5rem;
+  max-width: 800px;
+}
+.hero .label {
+  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: #a5b4fc; margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, #c4b5fd, #818cf8, #67e8f9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p {
+  font-size: 1.1rem; font-weight: 300;
+  color: rgba(232,228,255,0.65);
+  max-width: 28rem;
+}
+
+.glass-grid {
+  position: relative; z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 4rem;
+}
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.glass:hover {
+  border-color: rgba(139,92,246,0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(99,102,241,0.3);
+}
+.glass .icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--blue));
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 20px rgba(139,92,246,0.4);
+}
+.glass h3 {
+  font-size: 1.15rem; font-weight: 500; margin-bottom: 0.6rem;
+}
+.glass p {
+  font-size: 0.9rem; font-weight: 300;
+  color: rgba(232,228,255,0.55);
+}
+
+.telemetry {
+  position: relative; z-index: 5;
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 2.5rem;
+}
+.telemetry h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+.meters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.meter {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+.meter .val {
+  font-size: 1.8rem; font-weight: 500;
+  background: linear-gradient(90deg, #c4b5fd, #67e8f9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.meter .lbl {
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(232,228,255,0.4); margin-top: 0.25rem;
+}
+
+footer {
+  position: relative; z-index: 5;
+  text-align: center; padding: 2.5rem;
+  color: rgba(232,228,255,0.35); font-size: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+footer a { color: #a5b4fc; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<div class="planet" aria-hidden="true"></div>
+<nav>
+  <span class="logo">Helioscope</span>
+  <a href="../../">← Gallery</a>
+</nav>
+<section class="hero">
+  <p class="label">Observatory · Sector 7</p>
+  <h1>Watch the universe<br><em>breathe</em></h1>
+  <p>Glass panels against infinite dark. Instruments tuned to silence between stars.</p>
+</section>
+<section class="glass-grid">
+  <article class="glass">
+    <div class="icon" aria-hidden="true"></div>
+    <h3>Nebula Surveys</h3>
+    <p>Long-exposure catalogs of stellar nurseries — color mapped from infrared whispers.</p>
+  </article>
+  <article class="glass">
+    <div class="icon" aria-hidden="true"></div>
+    <h3>Orbital Mechanics</h3>
+    <p>Predictive models for comet paths, eclipses, and the slow dance of binary systems.</p>
+  </article>
+  <article class="glass">
+    <div class="icon" aria-hidden="true"></div>
+    <h3>Deep Field Archive</h3>
+    <p>Light that left its source before Earth had oceans. Stored in crystalline memory.</p>
+  </article>
+</section>
+<section class="telemetry">
+  <h2>Live telemetry</h2>
+  <div class="meters">
+    <div class="meter"><div class="val">−273.1°</div><div class="lbl">Cosmic Background</div></div>
+    <div class="meter"><div class="val">13.8 B</div><div class="lbl">Years Observed</div></div>
+    <div class="meter"><div class="val">4.2 ly</div><div class="lbl">Nearest Star</div></div>
+    <div class="meter"><div class="val">∞</div><div class="lbl">Questions Remaining</div></div>
+  </div>
+</section>
+<footer>
+  <p><a href="../../">← Back to Gallery</a> · Helioscope Cosmic Observatory</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AETHER:// — Amber CRT Terminal</title>
+<meta name="description" content="Retro terminal amber CRT hacker mythos. Boot into the mainframe.">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber: #ffb000;
+  --amber-dim: #cc8800;
+  --amber-glow: #ffcc33;
+  --bg: #0c0a00;
+  --crt-green-alt: #33ff66;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #000; }
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background: var(--bg);
+  color: var(--amber);
+  min-height: 100vh;
+  font-size: 18px;
+  line-height: 1.5;
+  text-shadow: 0 0 4px rgba(255,176,0,0.5);
+  overflow-x: hidden;
+}
+.crt {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1000;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+.crt::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+}
+.flicker {
+  animation: crtFlicker 0.15s infinite;
+}
+@keyframes crtFlicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  position: relative;
+}
+
+.boot {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: var(--amber-dim);
+}
+.boot .line { margin-bottom: 0.15rem; opacity: 0; animation: typeIn 0.01s forwards; }
+.boot .line:nth-child(1) { animation-delay: 0.1s; }
+.boot .line:nth-child(2) { animation-delay: 0.3s; }
+.boot .line:nth-child(3) { animation-delay: 0.5s; }
+.boot .line:nth-child(4) { animation-delay: 0.7s; }
+.boot .line:nth-child(5) { animation-delay: 0.9s; }
+@keyframes typeIn { to { opacity: 1; } }
+
+.prompt-line {
+  display: flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+}
+.cursor {
+  display: inline-block;
+  width: 0.6em; height: 1.1em;
+  background: var(--amber);
+  animation: blink 1s step-end infinite;
+  box-shadow: 0 0 8px var(--amber);
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+h1 {
+  font-family: 'VT323', monospace;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--amber), 0 0 30px rgba(255,176,0,0.3);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from { text-shadow: 0 0 8px var(--amber), 0 0 20px rgba(255,176,0,0.2); }
+  to { text-shadow: 0 0 14px var(--amber-glow), 0 0 40px rgba(255,176,0,0.45); }
+}
+.subtitle {
+  color: var(--amber-dim);
+  margin-bottom: 3rem;
+  font-size: 1rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+  border: 1px solid var(--amber-dim);
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(255,176,0,0.1), inset 0 0 30px rgba(255,176,0,0.03);
+}
+.section h2 {
+  font-family: 'VT323', monospace;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed var(--amber-dim);
+  padding-bottom: 0.5rem;
+}
+.section p { margin-bottom: 0.75rem; color: var(--amber-dim); }
+.section p strong { color: var(--amber); font-weight: 400; }
+
+.file-list { list-style: none; }
+.file-list li {
+  display: flex; gap: 1.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dotted rgba(255,176,0,0.2);
+  font-size: 0.95rem;
+}
+.file-list .perm { color: var(--amber-dim); min-width: 10ch; }
+.file-list .name { color: var(--amber); }
+.file-list .name:hover { text-decoration: underline; cursor: pointer; }
+
+.ascii {
+  font-family: 'VT323', monospace;
+  font-size: clamp(0.55rem, 1.8vw, 0.9rem);
+  line-height: 1.1;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--amber);
+  margin: 1.5rem 0;
+  text-shadow: 0 0 6px rgba(255,176,0,0.4);
+}
+
+.cmd {
+  margin-top: 2rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.3rem;
+}
+.cmd a {
+  color: var(--amber);
+  text-decoration: none;
+  border-bottom: 1px solid var(--amber-dim);
+}
+.cmd a:hover { color: var(--amber-glow); border-color: var(--amber-glow); }
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--amber-dim);
+  font-size: 0.85rem;
+  color: var(--amber-dim);
+}
+footer a { color: var(--amber); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="crt" aria-hidden="true"></div>
+<div class="wrap flicker">
+  <div class="boot" aria-hidden="true">
+    <div class="line">AETHER BIOS v2.4.1 (c) 1987-2026</div>
+    <div class="line">Memory Test: 640K OK</div>
+    <div class="line">Detecting drives........... DONE</div>
+    <div class="line">Loading KERNEL.SYS........ OK</div>
+    <div class="line">Mounting /dev/mythos...... OK</div>
+  </div>
+
+  <div class="prompt-line">
+    <span>root@aether:~$</span>
+    <span class="cursor" aria-hidden="true"></span>
+  </div>
+
+  <h1>AETHER://</h1>
+  <p class="subtitle">&gt; amber phosphor · mainframe mythos · access granted</p>
+
+  <div class="ascii" aria-hidden="true">
+    ╔══════════════════════════════════╗
+    ║  ▄▀▄ █▀▀ ▀█▀ █▄█ █▀▀ █▀▄         ║
+    ║  █▀█ ██▄  █  █ █ ██▄ █▀▄         ║
+    ║                                  ║
+    ║  SYSTEM ONLINE — TRUST NOTHING   ║
+    ╚══════════════════════════════════╝
+  </div>
+
+  <section class="section">
+    <h2>$ cat ./README.txt</h2>
+    <p>Welcome, operator. You have jacked into the <strong>AETHER</strong> network — a fictional mainframe where phosphor glow is law and every keystroke echoes in abandoned server rooms.</p>
+    <p>This terminal remembers dial-up handshakes, BBS door games, and the smell of warm electronics at 3 a.m.</p>
+  </section>
+
+  <section class="section">
+    <h2>$ ls -la /vault/</h2>
+    <ul class="file-list">
+      <li><span class="perm">-rwxr----</span><span class="name">cipher_keys.dat</span><span>2.4K</span></li>
+      <li><span class="perm">drwxr-x---</span><span class="name">dead_drops/</span><span>4.0K</span></li>
+      <li><span class="perm">-rw-r-----</span><span class="name">manifesto.txt</span><span>8.1K</span></li>
+      <li><span class="perm">-rwxr----</span><span class="name">phantom_shell.sh</span><span>1.2K</span></li>
+      <li><span class="perm">drwx------</span><span class="name">.hidden_node/</span><span>4.0K</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>$ whoami</h2>
+    <p><strong>ghost_in_the_shell</strong> — clearance level: AMBER</p>
+    <p>Last login: from a payphone that no longer exists.</p>
+    <p>Session encrypted. Logs overwritten. You were never here.</p>
+  </section>
+
+  <p class="cmd">$ <a href="../../">cd ../gallery && exit</a></p>
+
+  <footer>
+    <p><a href="../../">&lt;-- RETURN TO GALLERY</a> · AETHER CRT NODE · PHOSPHOR FOREVER</p>
+  </footer>
+</div>
+</body>
+</html>
