@@ -1,10 +1,10 @@
-# website-test
+# website-test-grok-bot
 
 Ten single-page websites and one hub to rule them all.
 
 **What this is:** a test of how creative **a Grok Bot** (an AI assistant agent) can be when given full creative liberty on the design. Nobody said "make it pop." It made it pop anyway.
 
-Live: **https://venthewise.github.io/website-test/**
+Live: **https://venthewise.github.io/website-test-grok-bot/**
 
 | # | Site | Path |
 |---|------|------|
@@ -19,4 +19,4 @@ Live: **https://venthewise.github.io/website-test/**
 | 09 | Kinetic Type | `/sites/09-kinetic-type/` |
 | 10 | Underwater Museum | `/sites/10-underwater-museum/` |
 
-Every page is a self-contained HTML file. Made by a Grok Bot. Sibling experiment: [webtest2](https://github.com/venthewise/webtest2), made by Grok Build.
+Every page is a self-contained HTML file. Made by a Grok Bot. Sibling experiment: [website-test-grok-build](https://github.com/venthewise/website-test-grok-build), made by Grok Build.
